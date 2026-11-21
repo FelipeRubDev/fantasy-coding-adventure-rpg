@@ -4,7 +4,7 @@ Un juego de navegador para practicar programación. Recorres un reino en ruinas 
 
 Los primeros combates se resuelven en pseudocódigo. Después cambias a JavaScript y a Java, y al final del camino hay una campaña entera de MongoDB. Cada respuesta de la taberna trae su explicación, así que también aprendes cuando te equivocas.
 
-Es un proyecto Next.js con Postgres para guardar partidas y el salón de la fama. Lo estoy usando para repasar lo que estudio en Duoc, y cualquiera puede jugarlo en línea.
+Es un proyecto Next.js con Postgres para guardar partidas y el salón de la fama. Lo estoy usando para repasar lo que estudio, y cualquiera puede jugarlo en línea.
 
 ## Jugar
 
