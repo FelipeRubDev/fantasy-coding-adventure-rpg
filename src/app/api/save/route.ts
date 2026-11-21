@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { ready } from "@/db";
 import { players } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
@@ -8,6 +8,8 @@ export async function GET(req: Request) {
   const id = new URL(req.url).searchParams.get("id");
   if (!id) return Response.json({ save: null });
   try {
+    const db = await ready();
+    if (!db) return Response.json({ save: null });
     const rows = await db.select().from(players).where(eq(players.id, id)).limit(1);
     return Response.json({ save: rows[0]?.save ?? null });
   } catch {
@@ -26,6 +28,8 @@ export async function PUT(req: Request) {
     const name = String(save.name ?? "Escriba").slice(0, 24) || "Escriba";
     const score = Math.max(0, Math.floor(Number(save.score) || 0));
     const level = Math.max(1, Math.floor(Number(save.level) || 1));
+    const db = await ready();
+    if (!db) return Response.json({ ok: true });
     await db
       .insert(players)
       .values({ id, name, score, level, save, updatedAt: new Date() })

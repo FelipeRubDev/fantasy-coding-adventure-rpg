@@ -1,12 +1,13 @@
 {
-  "name": "nextjs-postgresql-template",
+  "name": "fantasy-coding-adventure-rpg",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "start:local": "node start.js"
   },
   "dependencies": {
     "@fontsource/cinzel": "^5.3.0",
@@ -18,7 +19,7 @@
     "json5": "^2.2.3",
     "lucide-react": "^1.74.0",
     "mingo": "^7.2.7",
-    "next": "16.4.2",
+    "next": "16.4.6",
     "pg": "8.20.0",
     "react": "19.2.6",
     "react-dom": "19.2.6"
@@ -35,5 +36,6 @@
     "postcss": "8.5.23",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3"
-  }
+  },
+  "version": "1.0.0"
 }

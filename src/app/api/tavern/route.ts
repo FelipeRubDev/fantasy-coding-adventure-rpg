@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { ready } from "@/db";
 import { tavernBoards } from "@/db/schema";
 import { eq, lt } from "drizzle-orm";
 import { QUESTS } from "@/data/quests";
@@ -51,12 +51,15 @@ export async function GET() {
   const slot = Math.floor(now / HALF_DAY);
   let questIds = boardFor(slot);
   try {
-    const rows = await db.select().from(tavernBoards).where(eq(tavernBoards.slot, slot)).limit(1);
-    if (rows[0]) {
-      questIds = rows[0].questIds as string[];
-    } else {
-      await db.insert(tavernBoards).values({ slot, questIds }).onConflictDoNothing();
-      await db.delete(tavernBoards).where(lt(tavernBoards.slot, slot - 6));
+    const db = await ready();
+    if (db) {
+      const rows = await db.select().from(tavernBoards).where(eq(tavernBoards.slot, slot)).limit(1);
+      if (rows[0]) {
+        questIds = rows[0].questIds as string[];
+      } else {
+        await db.insert(tavernBoards).values({ slot, questIds }).onConflictDoNothing();
+        await db.delete(tavernBoards).where(lt(tavernBoards.slot, slot - 6));
+      }
     }
   } catch {
     /* si la base falla, el tablero determinista sigue funcionando */
